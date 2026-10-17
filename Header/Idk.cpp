@@ -4,10 +4,14 @@
 #include <algorithm>
 #include <iostream>
 
-
-void Idk::pushIn(double value)
+void Idk::pushInDouble(double value)
 {
     in.push_back(value);
+}
+
+void Idk::pushInStr(std::string input)
+{
+    str.push_back(input);
 }
 
 std::size_t Idk::getCount() const
@@ -17,14 +21,13 @@ std::size_t Idk::getCount() const
 
 void Idk::printNum() const
 {
-    for (const auto& value : in)
+    for (const auto &value : in)
     {
         std::cout << value << " ";
     }
 
     std::cout << '\n';
 }
-
 
 double Idk::getSum() const
 {
@@ -119,7 +122,6 @@ double Idk::getSecondLargest() const
     return hasSecondMax ? secondMax : 0.0;
 }
 
-
 bool Idk::contains(double value) const
 {
     for (double element : in)
@@ -147,7 +149,6 @@ std::size_t Idk::countOccurrences(double value) const
 
     return count;
 }
-
 
 bool Idk::removeAt(std::size_t index)
 {
@@ -191,6 +192,25 @@ bool Idk::removeDuplicates()
     }
 
     return removed;
+}
+
+std::string Idk::longestcommonPrefix() const
+{
+    if (str.empty())
+        return "";
+
+    for (std::size_t i = 0; i < str[0].size(); ++i)
+    {
+        char c = str[0][i];
+        for (std::size_t j = 1; j < str.size(); ++j)
+        {
+            if (i >= str[j].size() || str[j][i] != c)
+            {
+                return str[0].substr(0, i);
+            }
+        }
+    }
+    return str[0];
 }
 
 void Idk::clear()
